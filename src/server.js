@@ -14,7 +14,7 @@ const port = process.env.PORT || 3000;
     await sequelize.authenticate();
     await sequelize.sync();
 
-    app.listen(port, () => {
+    app.listen(port, "0.0.0.0", () => {
       console.log(`API running on http://localhost:${port}`);
     });
   } catch (e) {
