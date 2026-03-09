@@ -3,45 +3,45 @@ import { Search, User, Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-    const [isScrolled, setIsScrolled] = useState(false);
-    const [searchQuery, setSearchQuery] = useState('');
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
-    window.onscroll = () => {
-        setIsScrolled(window.pageYOffset === 0 ? false : true);
-        return () => (window.onscroll = null);
-    };
+  window.onscroll = () => {
+    setIsScrolled(window.pageYOffset === 0 ? false : true);
+    return () => (window.onscroll = null);
+  };
 
-    return (
-        <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
-            <div className="nav-container">
-                <Link to="/" className="logo">
-                    MOLA<span>STREAM</span>
-                </Link>
+  return (
+    <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+      <div className="nav-container">
+        <Link to="/" className="logo">
+          CRISRON<span>MOVIES</span>
+        </Link>
 
-                <div className="nav-links">
-                    <Link to="/">Inicio</Link>
-                    <Link to="/">Series</Link>
-                    <Link to="/">Películas</Link>
-                    <Link to="/">Novedades populares</Link>
-                </div>
+        <div className="nav-links">
+          <Link to="/">Inicio</Link>
+          <Link to="/">Series</Link>
+          <Link to="/">Películas</Link>
+          <Link to="/">Novedades populares</Link>
+        </div>
 
-                <div className="nav-actions">
-                    <div className="search-box">
-                        <Search size={20} />
-                        <input
-                            type="text"
-                            placeholder="Títulos, personas, géneros"
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                        />
-                    </div>
-                    <div className="user-profile">
-                        <User size={24} />
-                    </div>
-                </div>
-            </div>
+        <div className="nav-actions">
+          <div className="search-box">
+            <Search size={20} />
+            <input
+              type="text"
+              placeholder="Títulos, personas, géneros"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+          <div className="user-profile">
+            <User size={24} />
+          </div>
+        </div>
+      </div>
 
-            <style jsx>{`
+      <style jsx>{`
         .navbar {
           position: fixed;
           top: 0;
@@ -139,8 +139,8 @@ const Navbar = () => {
           .search-box input { width: 0; padding: 0; opacity: 0; }
         }
       `}</style>
-        </nav>
-    );
+    </nav>
+  );
 };
 
 export default Navbar;

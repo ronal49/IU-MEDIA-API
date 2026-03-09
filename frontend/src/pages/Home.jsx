@@ -39,7 +39,7 @@ const Home = () => {
         }
     };
 
-    if (loading) return <div className="loading">Cargando MOLA...</div>;
+    if (loading) return <div className="loading">Cargando CRISRON MOVIES...</div>;
 
     return (
         <div className="home-page animate-fade-in">

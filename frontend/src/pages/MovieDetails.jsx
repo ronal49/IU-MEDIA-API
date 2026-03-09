@@ -4,76 +4,76 @@ import axios from 'axios';
 import { Play, ArrowLeft, Star, Clock, Calendar } from 'lucide-react';
 
 const MovieDetails = () => {
-    const { id } = useParams();
-    const navigate = useNavigate();
-    const [movie, setMovie] = useState(null);
-    const [loading, setLoading] = useState(true);
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [movie, setMovie] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const fetchMovie = async () => {
-            try {
-                const res = await axios.get(`/api/media/${id}`);
-                setMovie(res.data);
-                setLoading(false);
-            } catch (error) {
-                console.error('Error fetching movie:', error);
-                setLoading(false);
-            }
-        };
-        fetchMovie();
-    }, [id]);
+  useEffect(() => {
+    const fetchMovie = async () => {
+      try {
+        const res = await axios.get(`/api/media/${id}`);
+        setMovie(res.data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching movie:', error);
+        setLoading(false);
+      }
+    };
+    fetchMovie();
+  }, [id]);
 
-    if (loading) return <div className="loading-details">Cargando detalles...</div>;
-    if (!movie) return <div className="error-details">Película no encontrada.</div>;
+  if (loading) return <div className="loading-details">Cargando detalles...</div>;
+  if (!movie) return <div className="error-details">Película no encontrada.</div>;
 
-    return (
-        <div className="movie-details animate-fade-in">
-            <button className="back-btn" onClick={() => navigate(-1)}>
-                <ArrowLeft size={24} />
-            </button>
+  return (
+    <div className="movie-details animate-fade-in">
+      <button className="back-btn" onClick={() => navigate(-1)}>
+        <ArrowLeft size={24} />
+      </button>
 
-            <div className="details-hero">
-                <img src={movie.imageUrl || 'https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=2070'} alt={movie.title} />
-                <div className="details-overlay" />
+      <div className="details-hero">
+        <img src={movie.imageUrl || 'https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=2070'} alt={movie.title} />
+        <div className="details-overlay" />
+      </div>
+
+      <div className="details-content premium-container">
+        <div className="details-grid">
+          <div className="info-main">
+            <h1>{movie.title}</h1>
+            <div className="meta-info">
+              <span className="year"><Calendar size={16} /> {movie.year}</span>
+              <span className="duration"><Clock size={16} /> 128 min</span>
+              <span className="genre">{movie.Genre?.name}</span>
             </div>
 
-            <div className="details-content premium-container">
-                <div className="details-grid">
-                    <div className="info-main">
-                        <h1>{movie.title}</h1>
-                        <div className="meta-info">
-                            <span className="year"><Calendar size={16} /> {movie.year}</span>
-                            <span className="duration"><Clock size={16} /> 128 min</span>
-                            <span className="genre">{movie.Genre?.name}</span>
-                        </div>
+            <p className="synopsis">{movie.synopsis}</p>
 
-                        <p className="synopsis">{movie.synopsis}</p>
-
-                        <div className="actions">
-                            <button className="btn-play-large">
-                                <Play fill="black" size={24} /> Ver Ahora
-                            </button>
-                        </div>
-                    </div>
-
-                    <div className="info-sidebar glass">
-                        <div className="sidebar-section">
-                            <h4>Director</h4>
-                            <p>{movie.Director?.name || 'Desconocido'}</p>
-                        </div>
-                        <div className="sidebar-section">
-                            <h4>Productora</h4>
-                            <p>{movie.Producer?.name || 'MOLA Films'}</p>
-                        </div>
-                        <div className="sidebar-section">
-                            <h4>Género</h4>
-                            <p>{movie.Genre?.name}</p>
-                        </div>
-                    </div>
-                </div>
+            <div className="actions">
+              <button className="btn-play-large">
+                <Play fill="black" size={24} /> Ver Ahora
+              </button>
             </div>
+          </div>
 
-            <style jsx>{`
+          <div className="info-sidebar glass">
+            <div className="sidebar-section">
+              <h4>Director</h4>
+              <p>{movie.Director?.name || 'Desconocido'}</p>
+            </div>
+            <div className="sidebar-section">
+              <h4>Productora</h4>
+              <p>{movie.Producer?.name || 'CRISRON Films'}</p>
+            </div>
+            <div className="sidebar-section">
+              <h4>Género</h4>
+              <p>{movie.Genre?.name}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style jsx>{`
         .movie-details {
           position: relative;
           min-height: 100vh;
@@ -195,8 +195,8 @@ const MovieDetails = () => {
           .info-main h1 { font-size: 2.5rem; }
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default MovieDetails;

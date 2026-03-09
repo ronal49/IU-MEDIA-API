@@ -14,7 +14,7 @@ app.use("/api/types", require("./routes/types.routes"));
 
 // Ruta raíz
 app.get("/", (req, res) => {
-    res.json({ message: "IU Media API funcionando 🎬", version: "1.0.0" });
+    res.json({ message: "CRISRON MOVIES API funcionando 🎬", version: "1.0.0" });
 });
 
 module.exports = app;
