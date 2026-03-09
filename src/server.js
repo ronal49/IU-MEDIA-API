@@ -1,8 +1,3 @@
-console.log(">>> server.js arrancó");
-console.log(">>> __filename:", __filename);
-console.log(">>> cwd:", process.cwd());
-console.log(">>> server.js está corriendo");
-
 require("dotenv").config();
 const app = require("./app");
 const { sequelize } = require("./models");
