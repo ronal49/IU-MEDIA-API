@@ -11,6 +11,8 @@ const Media = sequelize.define("Media", {
     producerId: { type: DataTypes.INTEGER },
     typeId: { type: DataTypes.INTEGER },
     imageUrl: { type: DataTypes.STRING },
+    videoUrl: { type: DataTypes.STRING },
+    embedUrl: { type: DataTypes.STRING },
 });
 
 module.exports = Media;

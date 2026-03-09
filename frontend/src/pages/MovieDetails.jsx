@@ -49,6 +49,20 @@ const MovieDetails = () => {
 
             <p className="synopsis">{movie.synopsis}</p>
 
+            {movie.embedUrl && (
+              <div className="video-container">
+                <iframe
+                  src={movie.embedUrl}
+                  width="100%"
+                  height="480"
+                  frameBorder="0"
+                  webkitallowfullscreen="true"
+                  mozallowfullscreen="true"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            )}
+
             <div className="actions">
               <button className="btn-play-large">
                 <Play fill="black" size={24} /> Ver Ahora
@@ -152,6 +166,19 @@ const MovieDetails = () => {
           line-height: 1.6;
           color: #e5e5e5;
           margin-bottom: 40px;
+        }
+
+        .video-container {
+          width: 100%;
+          border-radius: var(--border-radius);
+          overflow: hidden;
+          background: #000;
+          margin-bottom: 40px;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .video-container iframe {
+          display: block;
         }
 
         .btn-play-large {

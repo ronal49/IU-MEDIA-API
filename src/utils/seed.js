@@ -11,76 +11,76 @@ const seed = async () => {
         const typeSerie = await Type.create({ name: "Serie" });
 
         // 2. Géneros
-        const drama = await Genre.create({ name: "Drama" });
-        const comedia = await Genre.create({ name: "Comedia" });
-        const documental = await Genre.create({ name: "Documental" });
-        const accion = await Genre.create({ name: "Acción" });
+        const drama = await Genre.findOrCreate({ where: { name: "Drama" } }).then(([g]) => g);
+        const comedia = await Genre.findOrCreate({ where: { name: "Comedia" } }).then(([g]) => g);
+        const horror = await Genre.findOrCreate({ where: { name: "Horror" } }).then(([g]) => g);
+        const romance = await Genre.findOrCreate({ where: { name: "Romance" } }).then(([g]) => g);
+        const accion = await Genre.findOrCreate({ where: { name: "Acción" } }).then(([g]) => g);
+        const aventura = await Genre.findOrCreate({ where: { name: "Aventura" } }).then(([g]) => g);
+        const belico = await Genre.findOrCreate({ where: { name: "Bélico" } }).then(([g]) => g);
+        const western = await Genre.findOrCreate({ where: { name: "Western" } }).then(([g]) => g);
 
         // 3. Directores
-        const sergio = await Director.create({ name: "Sergio Cabrera" });
-        const victor = await Director.create({ name: "Víctor Gaviria" });
-        const ciro = await Director.create({ name: "Ciro Guerra" });
-        const varios = await Director.create({ name: "Varios" });
+        const george = await Director.findOrCreate({ where: { name: "George A. Romero" } }).then(([d]) => d);
+        const howard = await Director.findOrCreate({ where: { name: "Howard Hawks" } }).then(([d]) => d);
+        const buster = await Director.findOrCreate({ where: { name: "Buster Keaton" } }).then(([d]) => d);
+        const varios = await Director.findOrCreate({ where: { name: "Varios" } }).then(([d]) => d);
 
         // 4. Productoras
-        const rtvc = await Producer.create({ name: "RTVCPlay" });
-        const caracol = await Producer.create({ name: "Caracol Televisión" });
-        const dynamo = await Producer.create({ name: "Dynamo" });
+        const archive = await Producer.findOrCreate({ where: { name: "Internet Archive" } }).then(([p]) => p);
+        const crisron = await Producer.findOrCreate({ where: { name: "CRISRON Films" } }).then(([p]) => p);
 
-        // 5. Contenido (Películas/Series gratuitas o icónicas accesibles en RTVCPlay/YouTube)
+        // 5. Contenido (Películas de Archive.org)
         await Media.create({
-            title: "La Estrategia del Caracol",
-            year: 1993,
-            synopsis: "Un clásico del cine colombiano sobre vecinos que defienden su hogar de forma ingeniosa.",
+            title: "Night of the Living Dead",
+            year: 1968,
+            synopsis: "Un grupo de personas se refugia en una granja mientras hordas de muertos vivientes hambrientos de carne los acechan fuera.",
+            genreId: horror.id,
+            directorId: george.id,
+            producerId: archive.id,
+            typeId: typePelicula.id,
+            imageUrl: "https://archive.org/download/night-of-the-living-dead_1968/__ia_thumb.jpg",
+            videoUrl: "https://archive.org/download/night-of-the-living-dead_1968/Night%20of%20the%20Living%20Dead%20-%20(1968).mp4",
+            embedUrl: "https://archive.org/embed/night-of-the-living-dead_1968"
+        });
+
+        await Media.create({
+            title: "His Girl Friday",
+            year: 1940,
+            synopsis: "Comedia romántica sobre un editor de periódicos que intenta evitar que su ex esposa se vuelva a casar.",
             genreId: comedia.id,
-            directorId: sergio.id,
-            producerId: rtvc.id,
+            directorId: howard.id,
+            producerId: archive.id,
             typeId: typePelicula.id,
-            imageUrl: "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?q=80&w=2070"
+            imageUrl: "https://archive.org/download/his_girl_friday/__ia_thumb.jpg",
+            videoUrl: "https://archive.org/download/his_girl_friday/his_girl_friday.mp4",
+            embedUrl: "https://archive.org/embed/his_girl_friday"
         });
 
         await Media.create({
-            title: "Rodrigo D: No Futuro",
-            year: 1990,
-            synopsis: "Drama crudo sobre la juventud en Medellín durante los años 80.",
-            genreId: drama.id,
-            directorId: victor.id,
-            producerId: rtvc.id,
+            title: "The General",
+            year: 1926,
+            synopsis: "Un maquinista de tren se enfrenta a espías de la Unión en esta obra maestra del cine mudo dirigida por Buster Keaton.",
+            genreId: accion.id,
+            directorId: buster.id,
+            producerId: archive.id,
             typeId: typePelicula.id,
-            imageUrl: "https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=2074"
+            imageUrl: "https://archive.org/download/TheGeneral720p1926/__ia_thumb.jpg",
+            videoUrl: "https://archive.org/download/TheGeneral720p1926/TheGeneral720p.mp4",
+            embedUrl: "https://archive.org/embed/TheGeneral720p1926"
         });
 
         await Media.create({
-            title: "El Abrazo de la Serpiente",
-            year: 2015,
-            synopsis: "Un chamán amazónico y dos científicos buscan una planta sagrada durante décadas.",
-            genreId: drama.id,
-            directorId: ciro.id,
-            producerId: dynamo.id,
-            typeId: typePelicula.id,
-            imageUrl: "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=2059"
-        });
-
-        await Media.create({
-            title: "Los Colores de la Montaña",
-            year: 2010,
-            synopsis: "La amistad de unos niños en medio del conflicto armado, intentando recuperar un balón.",
-            genreId: drama.id,
+            title: "Nosferatu",
+            year: 1922,
+            synopsis: "El clásico de terror de F.W. Murnau, la primera transposición fílmica del mito de Drácula.",
+            genreId: horror.id,
             directorId: varios.id,
-            producerId: rtvc.id,
+            producerId: archive.id,
             typeId: typePelicula.id,
-            imageUrl: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=2050"
-        });
-
-        await Media.create({
-            title: "Don Chinche",
-            year: 1982,
-            synopsis: "Serie icónica de la televisión colombiana que retrata la cultura popular de Bogotá.",
-            genreId: comedia.id,
-            directorId: varios.id,
-            producerId: rtvc.id,
-            typeId: typeSerie.id,
-            imageUrl: "https://images.unsplash.com/photo-1542204172-3c3298132e0e?q=80&w=2070"
+            imageUrl: "https://archive.org/download/nosferatu_201508/__ia_thumb.jpg",
+            videoUrl: "https://archive.org/download/nosferatu_201508/dom-6567newnosferatu.mp4",
+            embedUrl: "https://archive.org/embed/nosferatu_201508"
         });
 
         console.log("¡Base de Datos Poblada con éxito! 🇨🇴🎬");
