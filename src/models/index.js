@@ -4,6 +4,11 @@ const Director = require("./Director");
 const Producer = require("./Producer");
 const Type = require("./Type");
 const Media = require("./Media");
+const User = require("./User");
+const Inventario = require("./Inventario");
+const EstadoEquipo = require("./EstadoEquipo");
+const Marca = require("./Marca");
+const TipoEquipo = require("./TipoEquipo");
 
 // Asociaciones
 Media.belongsTo(Genre, { foreignKey: "genreId", as: "genre" });
@@ -16,4 +21,15 @@ Director.hasMany(Media, { foreignKey: "directorId" });
 Producer.hasMany(Media, { foreignKey: "producerId" });
 Type.hasMany(Media, { foreignKey: "typeId" });
 
-module.exports = { sequelize, Genre, Director, Producer, Type, Media };
+// Inventario relations
+Inventario.belongsTo(User, { foreignKey: "usuarioId" });
+Inventario.belongsTo(Marca, { foreignKey: "marcaId" });
+Inventario.belongsTo(EstadoEquipo, { foreignKey: "estadoEquipoId" });
+Inventario.belongsTo(TipoEquipo, { foreignKey: "tipoEquipoId" });
+
+User.hasMany(Inventario, { foreignKey: "usuarioId" });
+Marca.hasMany(Inventario, { foreignKey: "marcaId" });
+EstadoEquipo.hasMany(Inventario, { foreignKey: "estadoEquipoId" });
+TipoEquipo.hasMany(Inventario, { foreignKey: "tipoEquipoId" });
+
+module.exports = { sequelize, Genre, Director, Producer, Type, Media, User, Inventario, EstadoEquipo, Marca, TipoEquipo };
